@@ -1,0 +1,16 @@
+onboarding = false
+
+# New tab with pi (top) + plain shell (bottom)
+[[keys.command]]
+key = "prefix+shift+c"
+type = "shell"
+command = "~/.local/bin/herdr-pi-tab"
+
+# Add a shell split under the current pane
+[[keys.command]]
+key = "prefix+shift+s"
+type = "shell"
+command = "~/.local/bin/herdr-pi-tab split"
+
+[ui.toast]
+delivery = "terminal"

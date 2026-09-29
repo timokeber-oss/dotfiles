@@ -1,0 +1,21 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = timok
+	email = timo.keber@sage.com
+# sage@www.tm.eur.proxy-3.appproxy.trafficmanager.net
+[core]
+	editor = nano
+	safecrlf = true
+	autocrlf = false
+[merge]
+	renormalize = true
+[credential]
+	helper = osxkeychain
+	helper = oauth
+[alias]
+       sw = "!f() { git switch $(git branch --format='%(refname:short)' | grep \"$1\" | head -n 1); }; f"
+
+# Machine-local settings & secrets (not tracked)
+[include]
+	path = ~/.gitconfig.local

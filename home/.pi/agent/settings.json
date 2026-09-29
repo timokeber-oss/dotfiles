@@ -1,0 +1,7 @@
+{
+  "lastChangelogVersion": "0.87.1",
+  "theme": "light",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "claude-opus-5.5",
+  "defaultThinkingLevel": "medium"
+}

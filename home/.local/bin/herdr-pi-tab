@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# herdr-pi-tab: pi on top + plain shell below.
+#   herdr-pi-tab         -> create a NEW tab with pi + shell
+#   herdr-pi-tab split   -> add a shell split under the CURRENT pane
+set -euo pipefail
+
+RATIO="${HERDR_PI_RATIO:-0.7}"   # share of height for pi
+
+current=$(herdr pane current)
+cwd=$(jq -r '.result.pane.foreground_cwd // .result.pane.cwd' <<<"$current")
+
+if [[ "${1:-}" == "split" ]]; then
+  pane=$(jq -r '.result.pane.pane_id' <<<"$current")
+  herdr pane split "$pane" --direction down --ratio "$RATIO" --cwd "$cwd" >/dev/null
+  exit 0
+fi
+
+ws=$(jq -r '.result.pane.workspace_id' <<<"$current")
+tab=$(herdr tab create --workspace "$ws" --cwd "$cwd" --focus)
+pi_pane=$(jq -r '.result.root_pane.pane_id' <<<"$tab")
+
+herdr pane split "$pi_pane" --direction down --ratio "$RATIO" --cwd "$cwd" >/dev/null
+herdr pane run "$pi_pane" pi >/dev/null
+# keep focus on the pi pane
+herdr pane focus --pane "$pi_pane" --direction up >/dev/null 2>&1 || true
