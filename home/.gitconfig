@@ -19,3 +19,5 @@
 # Machine-local settings & secrets (not tracked)
 [include]
 	path = ~/.gitconfig.local
+[submodule]
+	recurse = true
